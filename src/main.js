@@ -5,8 +5,11 @@ import {createFilmListTemplate} from "./components/film.js"
 import {createExtraFilmListTemplate} from "./components/film.js"
 import {createFilmCardTemplate} from "./components/card.js"
 import {createLoadMoreButtonTemplate} from "./components/more-button.js"
+import {generateFilms} from "./mock/films";
 
 const CARDS_COUNT = 5;
+
+console.log(generateFilms(3))
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
