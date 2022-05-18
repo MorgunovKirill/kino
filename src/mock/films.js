@@ -1,4 +1,6 @@
-const titles = ['Интерстеллар', 'Сядь за руль моей машины', 'Криминальное чтиво', 'Другие', 'Птицы', 'Мстители', 'Солярис', 'Форсаж', 'Аватар'];
+import {titles} from "../utils/titles";
+import {types} from "../utils/types";
+
 
 const generateFilms = (count = 1) => {
   const result = [];
@@ -7,7 +9,10 @@ const generateFilms = (count = 1) => {
     result.push(
       {
         title: titles[Math.floor(Math.random() * titles.length)],
-        rating: (Math.random() * 10).toFixed(1)
+        rating: (Math.random() * 10).toFixed(1),
+        year: Math.floor(Math.random() * 100) + 1922,
+        duration: (Math.random() * 3).toFixed(2),
+        type: types[Math.floor(Math.random() * titles.length)],
       }
     )
   }

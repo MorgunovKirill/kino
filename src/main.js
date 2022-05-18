@@ -7,9 +7,7 @@ import {createFilmCardTemplate} from "./components/card.js"
 import {createLoadMoreButtonTemplate} from "./components/more-button.js"
 import {generateFilms} from "./mock/films";
 
-const CARDS_COUNT = 5;
-
-console.log(generateFilms(3))
+const FILMS = generateFilms(10)
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -17,6 +15,7 @@ const render = (container, template, place) => {
 
 const siteHeaderElement = document.querySelector(`.header`);
 render(siteHeaderElement, createUserInfoTemplate(), `beforeend`);
+
 
 const siteMainElement = document.querySelector(`.main`);
 render(siteMainElement, createSiteMenuTemplate(), `beforeend`);
@@ -28,14 +27,14 @@ const filmsContainer = films.querySelector(`.films-list`);
 render(filmsContainer, createLoadMoreButtonTemplate(), `beforeend`);
 
 const filmsList = filmsContainer.querySelector(`.films-list__container`);
-for (let i = 0; i < CARDS_COUNT; i++) {
-  render(filmsList, createFilmCardTemplate(), `beforeend`)
+for (let i = 0; i < FILMS.length; i++) {
+  render(filmsList, createFilmCardTemplate(FILMS[i]), `beforeend`)
 }
 
 render(films, createExtraFilmListTemplate(), `beforeend`);
 render(films, createExtraFilmListTemplate(), `beforeend`);
 
-[...films.querySelectorAll('.films-list--extra')].forEach((el) => {
-  render(el.querySelector('.films-list__container'), createFilmCardTemplate(), `beforeend`)
-  render(el.querySelector('.films-list__container'), createFilmCardTemplate(), `beforeend`)
-})
+// [...films.querySelectorAll('.films-list--extra')].forEach((el) => {
+//   render(el.querySelector('.films-list__container'), createFilmCardTemplate(), `beforeend`)
+//   render(el.querySelector('.films-list__container'), createFilmCardTemplate(), `beforeend`)
+// })
