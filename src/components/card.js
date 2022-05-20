@@ -1,6 +1,5 @@
 export const createFilmCardTemplate = (film) => {
-  const {title, rating, year, duration, type, synopsis} = film;
-
+  const {title, rating, year, duration, type, synopsis, comments} = film;
 
   return (
     `<article class="film-card">
@@ -12,8 +11,8 @@ export const createFilmCardTemplate = (film) => {
             <span class="film-card__genre">${type}</span>
           </p>
           <img src="./images/posters/the-dance-of-life.jpg" alt="" class="film-card__poster">
-          <p class="film-card__description">Burlesque comic Ralph "Skid" Johnson (Skelly), and specialty dancer Bonny Lee King (Carroll), end up together on a cold, rainy night at a tr…</p>
-          <a class="film-card__comments">5 comments</a>
+          <p class="film-card__description">${synopsis}</p>
+          <a class="film-card__comments">${comments.length} comments</a>
           <form class="film-card__controls">
             <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
             <button class="film-card__controls-item button film-card__controls-item--mark-as-watched">Mark as watched</button>
