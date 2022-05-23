@@ -1,6 +1,7 @@
 import {titles} from "../utils/titles";
 import {types} from "../utils/types";
 import {mocTexts} from "../utils/texts";
+import {posters} from "../utils/posters";
 
 const generateFilms = (count = 1) => {
   const result = [];
@@ -27,6 +28,7 @@ const generateFilms = (count = 1) => {
         type: types[Math.floor(Math.random() * titles.length)],
         synopsis: synopsis.join('. '),
         comments,
+        poster: posters[Math.floor(Math.random() * posters.length)]
       }
     )
   }

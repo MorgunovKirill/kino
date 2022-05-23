@@ -1,5 +1,5 @@
 const createFilterMarkup = (filter) => {
-  return `<a href="#${filter.name}" className="main-navigation__item">${filter.name} ${filter.name !== 'All movies' ? `<span class="main-navigation__item-count">${filter.count}</span>` : ''}</a>`
+  return `<a href="#${filter.name}" class="main-navigation__item">${filter.name} ${filter.name !== 'All movies' ? `<span class="main-navigation__item-count">${filter.count}</span>` : ''}</a>`
 }
 
 export const createSiteMenuTemplate = (filters) => {

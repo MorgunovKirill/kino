@@ -15,6 +15,32 @@ const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
 };
 
+const compareBy = (array, type) => {
+  return [...array].sort(function (a, b) {
+
+      if (a[type] > b[type]) {
+        return 1;
+      }
+      if (a[type] < b[type]) {
+        return -1;
+      }
+      // a должно быть равным b
+      return 0;
+
+
+    // if (Array.isArray(type)) {
+    //     if (a[type] > b[type]) {
+    //       return 1;
+    //     }
+    //     if (a[type] < b[type]) {
+    //       return -1;
+    //     }
+    //     // a должно быть равным b
+    //     return 0;
+    // }
+  })
+}
+
 const siteHeaderElement = document.querySelector(`.header`);
 render(siteHeaderElement, createUserInfoTemplate(), `beforeend`);
 
@@ -37,6 +63,11 @@ render(films, createExtraFilmListTemplate('rated'), `beforeend`);
 render(films, createExtraFilmListTemplate('commented'), `beforeend`);
 
 [...films.querySelectorAll('.films-list--extra')].forEach((el) => {
+  if (el.classList.contains('films-list--extra-most-rated')) {
+    console.log(compareBy(FILMS, 'rating'))
+  } else if (el.classList.contains('films-list--extra-most-commented')) {
+    console.log(compareBy(FILMS, 'comments'))
+  }
   render(el.querySelector('.films-list__container'), createFilmCardTemplate(FILMS[0]), `beforeend`)
   render(el.querySelector('.films-list__container'), createFilmCardTemplate(FILMS[1]), `beforeend`)
 })
