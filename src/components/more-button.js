@@ -1,5 +1,5 @@
-export const createLoadMoreButtonTemplate = () => {
+export const createLoadMoreButtonTemplate = (remaining) => {
   return (
-    `<button class="films-list__show-more">Show more</button>`
+    `<button class="films-list__show-more">Show more ${remaining} films</button>`
   )
 };
