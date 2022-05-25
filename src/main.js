@@ -8,6 +8,7 @@ import {createLoadMoreButtonTemplate} from "./components/more-button.js"
 import {generateFilms} from "./mock/films";
 import {generateFilters} from "./mock/filters";
 
+const FILMS_PACK = 5;
 const FILMS = generateFilms(10);
 const FILTERS = generateFilters();
 
@@ -52,9 +53,9 @@ export const addFilms = (filmsArray, count) => {
     render(filmsList, createFilmCardTemplate(filmsArray[i]), `beforeend`);
   }
 
-  console.log(filmsRemaining)
+  filmsRemaining = filmsArray.slice(count)
 
-  return filmsRemaining = filmsArray.slice(count)
+  if (filmsRemaining.length < 1) filmsContainer.removeChild(filmsContainer.querySelector('.films-list__show-more'))
 }
 
 const siteHeaderElement = document.querySelector(`.header`);
@@ -68,7 +69,7 @@ render(siteMainElement, createFilmListTemplate(), `beforeend`);
 
 const films = siteMainElement.querySelector(`.films`);
 const filmsContainer = films.querySelector(`.films-list`);
-render(filmsContainer, createLoadMoreButtonTemplate(filmsRemaining.length), `beforeend`);
+render(filmsContainer, createLoadMoreButtonTemplate(FILMS_PACK), `beforeend`);
 
 const filmsList = filmsContainer.querySelector(`.films-list__container`);
 
@@ -76,7 +77,7 @@ const filmsList = filmsContainer.querySelector(`.films-list__container`);
 // for (let i = 0; i < FILMS.length; i++) {
 //   render(filmsList, createFilmCardTemplate(FILMS[i]), `beforeend`)
 // }
-addFilms(filmsRemaining.slice(0), 5);
+addFilms(filmsRemaining.slice(0), FILMS_PACK);
 
 render(films, createExtraFilmListTemplate('rated'), `beforeend`);
 render(films, createExtraFilmListTemplate('commented'), `beforeend`);
@@ -95,6 +96,6 @@ render(films, createExtraFilmListTemplate('commented'), `beforeend`);
 
 filmsContainer.querySelector('.films-list__show-more').addEventListener('click', (evt) => {
   evt.preventDefault();
-  addFilms(filmsRemaining, 5);
+  addFilms(filmsRemaining, FILMS_PACK);
 })
 
