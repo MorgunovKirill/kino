@@ -1,47 +1,21 @@
-import {createUserInfoTemplate} from "./components/user.js"
-import {createSiteMenuTemplate} from "./components/menu.js"
-import {createSortTemplate} from "./components/sort.js"
-import {createFilmListTemplate} from "./components/film.js"
-import {createExtraFilmListTemplate} from "./components/film.js"
 import {createFilmCardTemplate} from "./components/card.js"
-import {createLoadMoreButtonTemplate} from "./components/more-button.js"
 import {generateFilms} from "./mock/films";
 import {generateFilters} from "./mock/filters";
+import {compareBy, render, render2} from "./utils/utils";
+import UserInfo from "./components/user";
+import SiteMenu from "./components/menu";
+import Sort from "./components/sort";
+import FilmList from "./components/film.js"
+import LoadMoreButton from "./components/more-button";
+import FilmListExtra from "./components/filmExtra";
 
+const FILMS_COUNT = 19;
 const FILMS_PACK = 5;
-const FILMS = generateFilms(10);
+
+const FILMS = generateFilms(FILMS_COUNT);
 const FILTERS = generateFilters();
 
 let filmsRemaining = [...FILMS];
-
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
-};
-
-const compareBy = (array, type) => {
-  return [...array].sort(function (a, b) {
-
-    if (Array.isArray(a[type])) {
-        if (a[type].length > b[type].length) {
-          return 1;
-        }
-        if (a[type].length < b[type].length) {
-          return -1;
-        }
-        // a должно быть равным b
-        return 0;
-    } else {
-      if (a[type] > b[type]) {
-        return 1;
-      }
-      if (a[type] < b[type]) {
-        return -1;
-      }
-      // a должно быть равным b
-      return 0;
-    }
-  })
-}
 
 export const addFilms = (filmsArray, count) => {
   for (let i = 0; i < count; i++) {
@@ -59,28 +33,28 @@ export const addFilms = (filmsArray, count) => {
 }
 
 const siteHeaderElement = document.querySelector(`.header`);
-render(siteHeaderElement, createUserInfoTemplate(), `beforeend`);
 
+render2(siteHeaderElement, new UserInfo().getElement(), `beforeend`);
 
 const siteMainElement = document.querySelector(`.main`);
-render(siteMainElement, createSiteMenuTemplate(FILTERS), `beforeend`);
-render(siteMainElement, createSortTemplate(), `beforeend`);
-render(siteMainElement, createFilmListTemplate(), `beforeend`);
+render2(siteMainElement, new SiteMenu(FILTERS).getElement(), `beforeend`);
+
+render2(siteMainElement, new Sort().getElement(), `beforeend`);
+
+render2(siteMainElement, new FilmList().getElement(), `beforeend`);
 
 const films = siteMainElement.querySelector(`.films`);
 const filmsContainer = films.querySelector(`.films-list`);
-render(filmsContainer, createLoadMoreButtonTemplate(FILMS_PACK), `beforeend`);
+
+render2(filmsContainer, new LoadMoreButton(FILMS_PACK).getElement(), `beforeend`);
 
 const filmsList = filmsContainer.querySelector(`.films-list__container`);
 
-
-// for (let i = 0; i < FILMS.length; i++) {
-//   render(filmsList, createFilmCardTemplate(FILMS[i]), `beforeend`)
-// }
 addFilms(filmsRemaining.slice(0), FILMS_PACK);
 
-render(films, createExtraFilmListTemplate('rated'), `beforeend`);
-render(films, createExtraFilmListTemplate('commented'), `beforeend`);
+render2(films, new FilmListExtra('rated').getElement(), `beforeend`);
+render2(films, new FilmListExtra('commented').getElement(), `beforeend`);
+
 
 [...films.querySelectorAll('.films-list--extra')].forEach((el) => {
   if (el.classList.contains('films-list--extra-most-rated')) {
