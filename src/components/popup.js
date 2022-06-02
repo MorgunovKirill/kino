@@ -1,4 +1,4 @@
-import {createElement} from "../utils/utils";
+import AbstractComponent from "./AbstractComponent";
 
 const createFilmPopupTemplate = (film) => {
   const {title, rating, year, duration, type, synopsis, comments, poster} = film;
@@ -178,25 +178,14 @@ const createFilmPopupTemplate = (film) => {
 };
 
 
-export default class FilmPopup {
+export default class FilmPopup extends AbstractComponent{
   constructor(film) {
+    super();
+
     this._film  = film
-    this._element = null;
   }
 
   getTemplate() {
     return createFilmPopupTemplate(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate())
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null
   }
 }

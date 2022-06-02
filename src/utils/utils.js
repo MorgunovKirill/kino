@@ -10,19 +10,6 @@ export const createElement = (template) => {
   return newElement.firstChild
 }
 
-export const render = (container, element, place) => {
-
-  switch (place) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.BEFOREEND:
-      container.append(element);
-      break;
-  }
-};
-
-
 export const compareBy = (array, type) => {
   return [...array].sort(function (a, b) {
 
